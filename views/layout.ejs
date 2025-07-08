@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>随意论坛</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <h1>随意论坛</h1>
+      <nav class="auth-links">
+        <% if (user) { %>
+          <span>欢迎，<%= user.name %>！</span>
+          |
+          <a href="#" onclick="logoutConfirm()">退出</a>
+        <% } else { %>
+          <a href="/login">登录</a>
+          <a href="/register">注册</a>
+        <% } %>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <%- body %>
+  </main>
+
+  <script>
+    function logoutConfirm() {
+      if (confirm("确定要退出登录吗？")) {
+        window.location.href = "/logout";
+      }
+    }
+  </script>
+</body>
+</html>
+

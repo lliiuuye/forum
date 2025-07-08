@@ -1,0 +1,17 @@
+<h2><%= post.title %></h2>
+<p><%= post.content %></p>
+
+<h3>评论</h3>
+<ul>
+  <% comments.forEach(c => { %>
+    <li><%= c.content %></li>
+  <% }) %>
+</ul>
+
+<h3>添加评论</h3>
+<form method="POST" action="/posts/<%= post.id %>/comment">
+  <textarea name="comment" required></textarea><br>
+  <button type="submit">评论</button>
+</form>
+
+<a href="/" class="back-button">← 返回帖子列表</a>

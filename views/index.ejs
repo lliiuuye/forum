@@ -1,0 +1,54 @@
+<h2>帖子列表</h2>
+
+<table border="1" cellpadding="10" cellspacing="0" class="post-table">
+  <thead>
+    <tr>
+      <th>帖子名</th>
+      <th>作者</th>
+      <th>时间</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% posts.forEach(post => { %>
+      <tr>
+
+        <td>
+            <a href="/posts/<%= post.id %>">
+                <%= post.title %>
+                <% if (post.is_pinned) { %>
+                <span style="color: red;">📌(Top)</span>
+                <% } %>
+            </a>
+        </td>
+        <td><%= post.author ? post.author : '' %></td>
+        <td><%= new Date(post.created_at).toLocaleString() %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<% if (user) { %>
+  <a href="/account"><button>我的账户</button></a>
+  <!-- <a href="/posts/account"><button>我的账户</button></a> -->
+
+<% } else { %>
+  <a href="/login"><button>我的账户</button></a>
+<% } %>
+
+
+<h3>发帖</h3>
+<% if (user) { %> <!-- 如果用户已登录，显示表单 -->
+  <form method="POST" action="/posts">
+    <input type="text" name="title" placeholder="标题" required><br>
+    <textarea name="content" placeholder="内容" required></textarea><br>
+    <button type="submit">发布</button>
+  </form>
+<% } else { %> <!-- 如果没有登录，显示禁用的表单 -->
+  <p>你需要 <a href="/login">登录</a> 才能发帖。</p>
+  <form method="POST" action="/posts" disabled>
+    <input type="text" name="title" placeholder="标题" required disabled><br>
+    <textarea name="content" placeholder="内容" required disabled></textarea><br>
+    <button type="submit" disabled>发布</button>
+  </form>
+<% } %>
+

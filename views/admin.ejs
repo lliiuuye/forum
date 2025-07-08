@@ -1,0 +1,42 @@
+<h2>管理员帖子管理页面</h2>
+
+<!-- <a href="/"><button>返回首页</button></a> -->
+
+<table border="1" cellpadding="10" cellspacing="0" class="post-table">
+  <thead>
+    <tr>
+      <th>帖子标题</th>
+      <th>作者</th>
+      <th>时间</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% posts.forEach(post => { %>
+      <tr>
+        <td>
+            <a href="/posts/<%= post.id %>">
+                <%= post.title %>
+                <% if (post.is_pinned) { %>
+                <span style="color: red;">📌(Top)</span>
+                <% } %>
+            </a>
+        </td>
+
+        <td><%= post.author %></td>
+        <td><%= new Date(post.created_at).toLocaleString() %></td>
+
+        <td>
+            <form method="POST" action="/admin/<%= post.id %>/toggle-pin">
+                <button type="submit"><%= post.is_pinned ? "取消置顶" : "置顶" %></button>
+            </form>
+            <form method="POST" action="/admin/<%= post.id %>/delete" onsubmit="return confirm('确认删除这条帖子？');">
+                <button type="submit">删除</button>
+            </form>
+        </td>
+
+
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
