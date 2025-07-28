@@ -13,6 +13,8 @@
         <% if (user) { %>
           <span>欢迎，<%= user.name %>！</span>
           |
+              <a href="/posts/new">发帖</a>  <!-- 这是新增的按钮 -->
+          |
           <a href="#" onclick="logoutConfirm()">退出</a>
         <% } else { %>
           <a href="/login">登录</a>
