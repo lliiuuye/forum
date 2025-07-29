@@ -19,6 +19,15 @@ const db = require("../db");
 // });
 
 
+// 发帖页面（显示发帖表单）
+router.get("/new", (req, res) => {
+  if (!req.session.user) {
+    return res.redirect("/login");
+  }
+  res.render("new-post", { user: req.session.user });
+});
+
+
 // 查看单个帖子
 router.get("/:id", async (req, res) => {
   const [post] = await db.query(
@@ -99,14 +108,6 @@ router.post("/:id/delete", async (req, res) => {
   }
 
   res.status(403).send("你没有权限删除这个帖子");
-});
-
-// 发帖页面（显示发帖表单）
-router.get("/new", (req, res) => {
-  if (!req.session.user) {
-    return res.redirect("/login");
-  }
-  res.render("new-post", { user: req.session.user });
 });
 
 
