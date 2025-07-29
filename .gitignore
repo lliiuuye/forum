@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+
+# 环境变量
+.env
+
+# 日志文件
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# 操作系统生成的无关文件
+.DS_Store
+Thumbs.db
+
+# VSCode 设置
+.vscode/
+
+# 数据库临时文件（如果有）
+*.sqlite
+*.sqlite3
+*.db
+
+# 编译缓存等
+dist/
+build/
+coverage/
+
+# EJS 缓存（极少见，但保险起见）
+*.ejs~
